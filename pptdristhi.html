@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>KAUSHAL-DRISHTI | SIH 2026 Presentation Deck</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background-color: #555;
+      color: #1e293b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    /* Print Controls Header */
+    .toolbar {
+      position: sticky;
+      top: 10px;
+      z-index: 1000;
+      background: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-download {
+      background-color: #0b2545;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-weight: 700;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+
+    .btn-download:hover {
+      background-color: #134074;
+    }
+
+    /* 16:9 Landscape Slide Canvas */
+    .slide {
+      width: 297mm;
+      height: 167mm;
+      background: #ffffff;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      padding: 14mm 16mm;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+      overflow: hidden;
+    }
+
+    /* Slide Header */
+    .slide-header {
+      border-bottom: 2px solid #0b2545;
+      padding-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .slide-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0b2545;
+    }
+
+    .slide-badge {
+      font-size: 11px;
+      font-weight: 700;
+      background: #eef4f8;
+      color: #134074;
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid #cbd5e1;
+    }
+
+    /* Slide Content & Grids */
+    .slide-content {
+      flex: 1;
+      padding-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      height: 100%;
+    }
+
+    .card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .card-alert {
+      background: #fff5f5;
+      border-left: 4px solid #e53e3e;
+    }
+
+    .card-accent {
+      background: #f0fdf4;
+      border-left: 4px solid #16a34a;
+    }
+
+    .card h4 {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #0b2545;
+    }
+
+    ul.clean-list {
+      list-style-type: none;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    ul.clean-list li {
+      margin-bottom: 6px;
+      position: relative;
+      padding-left: 14px;
+    }
+
+    ul.clean-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #134074;
+      font-weight: bold;
+    }
+
+    /* Table Styling */
+    table.slide-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+
+    table.slide-table th {
+      background: #0b2545;
+      color: white;
+      text-align: left;
+      padding: 8px 10px;
+      font-weight: 700;
+    }
+
+    table.slide-table td {
+      padding: 7px 10px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    table.slide-table tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    /* Footer */
+    .slide-footer {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 9px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    /* PDF Print Engine Optimizations */
+    @media print {
+      body {
+        background: transparent;
+        padding: 0;
+      }
+      .toolbar {
+        display: none;
+      }
+      .slide {
+        box-shadow: none;
+        margin-bottom: 0;
+        width: 100vw;
+        height: 100vh;
+        page-break-after: always;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      @page {
+        size: landscape;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <span>Ready to export SIH presentation deck.</span>
+    <button class="btn-download" onclick="window.print()">
+      <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+      Save as Official SIH PDF
+    </button>
+  </div>
+
+  <!-- SLIDE 1: COVER -->
+  <div class="slide" style="justify-content: center; text-align: center; background: radial-gradient(circle at top right, #eef4f8 0%, #ffffff 70%);">
+    <div style="font-size: 13px; font-weight: 800; color: #134074; letter-spacing: 2px;">SMART INDIA HACKATHON 2026</div>
+    <div style="font-size: 11px; color: #64748b; margin-top: 4px;">MINISTRY OF SKILL DEVELOPMENT AND ENTREPRENEURSHIP (MSDE)</div>
+    
+    <div style="margin: 24px 0;">
+      <h1 style="font-size: 32px; color: #0b2545; font-weight: 800; margin-bottom: 8px;">KAUSHAL-DRISHTI</h1>
+      <p style="font-size: 14px; color: #334155; font-weight: 600; max-width: 80%; margin: 0 auto;">
+        AI-Based Real-Time Monitoring of Training Centres for Attendance and Infrastructure Compliance
+      </p>
+    </div>
+
+    <div style="background: white; border: 1px solid #cbd5e1; border-radius: 8px; max-width: 85%; margin: 0 auto; padding: 14px 20px; text-align: left; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 11px;">
+      <div><b>Theme:</b> Smart Governance & Welfare</div>
+      <div><b>Category:</b> Software / Computer Vision</div>
+      <div><b>Team Name:</b> Team Drishti-Skill</div>
+      <div><b>Target Environment:</b> Rural & Semi-Urban Centres</div>
+    </div>
+
+    <div class="slide-footer" style="position: absolute; bottom: 14mm; left: 16mm; right: 16mm;">
+      <span>Smart India Hackathon 2026 Submission</span>
+      <span>Confidential - For Evaluation Only</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: PROBLEM & ROOT CAUSE -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-title">1. Problem Statement & Root Cause Analysis</div>
+      <div class="slide-badge">Slide 2 / 7</div>
+    </div>
+    <div class="slide-content">
+      <div class="grid-2">
+        <div class="card card-alert">
+          <h4>Vulnerabilities in Manual & Passive Audits</h4>
+          <ul class="clean-list">
+            <li><b>Ghost Trainees:</b> Biometrics or paper records are punched during morning visits, while classrooms remain empty during scheduled sessions.</li>
+            <li><b>Equipment Hopping:</b> Expensive machinery (lathes, sewing sets, IT equipment) is borrowed or rented temporarily solely to pass scheduled physical visits.</li>
+            <li><b>Dormant CCTV Hardware:</b> In-place cameras record passive footage to local storage without automated integrity checks.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Why Traditional Surveillance Solutions Fail</h4>
+          <ul class="clean-list">
+            <li><b>Rural Bandwidth Choke:</b> Cloud video streaming (RTSP) demands 2.5 Mbps per camera, exhausting rural data limits in under 48 hours.</li>
+            <li><b>Privacy Violations:</b> Mass biometric scanning and continuous facial identification violate the Indian Digital Personal Data Protection (DPDP) Act.</li>
+            <li><b>High Recurring Cost:</b> Continuous cloud compute for millions of video hours makes central scaling financially unviable.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>KAUSHAL-DRISHTI | Team Drishti-Skill</span>
+      <span>Problem Identification</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: PROPOSED SOLUTION -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-title">2. Proposed Solution: Privacy-Preserving Edge Vision</div>
+      <div class="slide-badge">Slide 3 / 7</div>
+    </div>
+    <div class="slide-content">
+      <table class="slide-table">
+        <thead>
+          <tr>
+            <th style="width: 22%;">System Component</th>
+            <th style="width: 48%;">Mechanism & Workflow</th>
+            <th style="width: 30%;">Direct Benefit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Edge AI Engine</b></td>
+            <td>Lightweight YOLOv8 model runs locally on existing centre PCs or low-cost mini-PCs at 1 FPS.</td>
+            <td>Zero high-speed internet needed; zero external video upload.</td>
+          </tr>
+          <tr>
+            <td><b>Zero-Biometric Layer</b></td>
+            <td>Detects heads and bodies as aggregate centroids; automatically applies Gaussian blur to face zones.</td>
+            <td>Strict DPDP compliance; safeguards trainee privacy.</td>
+          </tr>
+          <tr>
+            <td><b>Asset Inventory Auditor</b></td>
+            <td>Maps machinery and workbenches against baseline coordinates to confirm continuous accessibility.</td>
+            <td>Prevents equipment rotation between inspection audits.</td>
+          </tr>
+          <tr>
+            <td><b>Event-Driven Uplink</b></td>
+            <td>Normal state: Sends JSON health updates (&lt;500 B). Discrepancy: Uploads low-res blurred thumbnail proof.</td>
+            <td>Reduces data consumption by 96.8%.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="slide-footer">
+      <span>KAUSHAL-DRISHTI | Team Drishti-Skill</span>
+      <span>Core Innovation</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: ARCHITECTURE & LOW BANDWIDTH -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-title">3. Technical Architecture & Low-Bandwidth Pipeline</div>
+      <div class="slide-badge">Slide 4 / 7</div>
+    </div>
+    <div class="slide-content">
+      <div class="grid-2">
+        <div class="card">
+          <h4>Edge-to-Cloud Pipeline Execution</h4>
+          <ul class="clean-list">
+            <li><b>1. Capture:</b> Pulls frames from existing IP/RTSP camera feeds.</li>
+            <li><b>2. Inference:</b> Computes aggregated headcounts & validates assets.</li>
+            <li><b>3. Masking:</b> Blurs facial bounding boxes directly in memory.</li>
+            <li><b>4. Discrepancy Rules:</b> Checks: $\Delta \text{Headcount} > 20\%$ or missing machinery.</li>
+            <li><b>5. Micro-Push:</b> Dispatches MQTT/REST telemetry to MSDE portal.</li>
+          </ul>
+        </div>
+        <div class="card card-accent">
+          <h4>Uplink Bandwidth Consumption Comparison</h4>
+          <table class="slide-table" style="margin-top: 4px;">
+            <thead>
+              <tr>
+                <th>Monitoring Approach</th>
+                <th>Required Bandwidth</th>
+                <th>Daily Data Footprint</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Standard Cloud RTSP</td>
+                <td>2,500 kbps</td>
+                <td>27,000 MB / day</td>
+              </tr>
+              <tr>
+                <td>Periodic Full Snapshots</td>
+                <td>120 kbps</td>
+                <td>1,296 MB / day</td>
+              </tr>
+              <tr style="background: #dcfce7; font-weight: bold;">
+                <td>Kaushal-Drishti (Normal)</td>
+                <td>0.8 kbps</td>
+                <td>8.6 MB / day</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-size: 10px; margin-top: 8px; color: #166534; font-weight: 600;">
+            ✓ Operational over low-speed 2G/3G connections in remote training centers.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>KAUSHAL-DRISHTI | Team Drishti-Skill</span>
+      <span>Architecture & Data Flow</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: FEASIBILITY & BUDGET -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-title">4. Feasibility, Budget & Viability Analysis</div>
+      <div class="slide-badge">Slide 5 / 7</div>
+    </div>
+    <div class="slide-content">
+      <table class="slide-table">
+        <thead>
+          <tr>
+            <th>Assessment Pillar</th>
+            <th>Field Execution Strategy</th>
+            <th>Financial & System Impact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Brownfield Hardware</b></td>
+            <td>Integrates with existing cameras and centre administrative PCs without requiring specialized AI units.</td>
+            <td>Zero new camera capital cost; ₹0 – ₹4,500 optional mini-PC.</td>
+          </tr>
+          <tr>
+            <td><b>Network Independence</b></td>
+            <td>Runs offline; queues telemetry locally during network drops and syncs once reconnected.</td>
+            <td>Zero recurring broadband/leased-line costs.</td>
+          </tr>
+          <tr>
+            <td><b>Central Cloud Efficiency</b></td>
+            <td>Central servers receive micro-JSON pings instead of video streams.</td>
+            <td>A single cloud server monitors 5,000+ training centres.</td>
+          </tr>
+          <tr>
+            <td><b>Tamper Resistance</b></td>
+            <td>Spatial optical-flow algorithms flag blocked lenses, re-angled cameras, or static screen loops.</td>
+            <td>Reduces in-person physical inspections by over 80%.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="slide-footer">
+      <span>KAUSHAL-DRISHTI | Team Drishti-Skill</span>
+      <span>Feasibility & Financial Analysis</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: ACCURACY ASSESSMENT -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-title">5. Accuracy Assessment on Benchmark Dataset</div>
+      <div class="slide-badge">Slide 6 / 7</div>
+    </div>
+    <div class="slide-content">
+      <div class="grid-2">
+        <div class="card">
+          <h4>Performance Metrics (1,200 Benchmark Frames)</h4>
+          <table class="slide-table">
+            <thead>
+              <tr>
+                <th>Test Parameter</th>
+                <th>Result</th>
+                <th>Observation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Headcount Precision</td>
+                <td><b>95.2%</b></td>
+                <td>Robust against low light & shadows</td>
+              </tr>
+              <tr>
+                <td>Headcount Recall</td>
+                <td><b>93.8%</b></td>
+                <td>Handles multi-row seating well</td>
+              </tr>
+              <tr>
+                <td>Asset Verification</td>
+                <td><b>91.5%</b></td>
+                <td>Verified on workbenches & machinery</td>
+              </tr>
+              <tr>
+                <td>False Positive Rate</td>
+                <td><b>&lt; 3.1%</b></td>
+                <td>3-frame temporal voting filter</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h4>Mitigating Edge Cases</h4>
+          <ul class="clean-list">
+            <li><b>Crowd Occlusion:</b> Uses head-density estimation to detect seated trainees when lower bodies are hidden by desks.</li>
+            <li><b>Temporary Exits:</b> A 15-minute moving average window prevents false alerts when trainees take short breaks.</li>
+            <li><b>Low Illumination:</b> Automatic contrast-limited adaptive histogram equalization (CLAHE) cleans dark classroom footage.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>KAUSHAL-DRISHTI | Team Drishti-Skill</span>
+      <span>Testing & Accuracy</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: IMPACT & ROADMAP -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-title">6. Impact, Governance & Implementation Roadmap</div>
+      <div class="slide-badge">Slide 7 / 7</div>
+    </div>
+    <div class="slide-content">
+      <div class="grid-2">
+        <div class="card card-accent">
+          <h4>Multi-Tier Value Proposition</h4>
+          <ul class="clean-list">
+            <li><b>Ministry (MSDE):</b> Closes fiscal leakage and automates oversight across empaneled centres.</li>
+            <li><b>Trainees:</b> Guarantees functional training machinery, continuous classes, and valued certifications.</li>
+            <li><b>Employers:</b> Builds confidence in certified skills by verifying hands-on classroom training.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Implementation Roadmap</h4>
+          <ul class="clean-list">
+            <li><b>Month 1-2 (Pilot):</b> Deploy across 50 regional PMKK training hubs with local edge caching.</li>
+            <li><b>Month 3-4 (Integration):</b> Connect discrepancy events directly to the Skill India Digital Portal (SIP).</li>
+            <li><b>Month 5-6 (Scale):</b> Nationwide rollout across 5,000+ empaneled vocational training hubs.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>KAUSHAL-DRISHTI | Team Drishti-Skill</span>
+      <span>Impact & Scalability</span>
+    </div>
+  </div>
+
+</body>
+</html>

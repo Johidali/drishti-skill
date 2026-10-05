@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment: {POSTGRES_USER: dristhi, POSTGRES_PASSWORD: dristhi, POSTGRES_DB: dristhi}
+    healthcheck: {test: ["CMD-SHELL","pg_isready -U dristhi"], interval: 3s, retries: 20}
+  backend:
+    build: ./backend
+    environment: {DATABASE_URL: "postgresql+psycopg2://dristhi:dristhi@db/dristhi"}
+    depends_on: {db: {condition: service_healthy}}
+    ports: ["8000:8000"]
+  edge:
+    build: {context: ., dockerfile: edge.Dockerfile}
+    command: sh -c "python simulator/generate_test_streams.py --out /data && python vision-engine/edge_agent.py --streams /data --api http://backend:8000"
+    depends_on: [backend]
+  frontend:
+    image: nginx:alpine
+    volumes: ["./frontend/index.html:/usr/share/nginx/html/index.html:ro","./frontend/nginx.conf:/etc/nginx/conf.d/default.conf:ro"]
+    depends_on: [backend]
+    ports: ["3000:80"]
